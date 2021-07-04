@@ -5,9 +5,15 @@ class Node:
 
 class LinkedList:
 	def __init__(self):
-		self.head = None 
+		self.head = None
 
-	def insert(self, newNode):
+	def insertHead(self, newNode):
+		temporaryNode = self.head
+		self.head = newNode
+		self.head.next = temporaryNode
+		del temporaryNode 
+
+	def insertEnd(self, newNode):
 		if self.head is None:
 			self.head = newNode
 		else:
@@ -19,18 +25,22 @@ class LinkedList:
 			lastNode.next = newNode
 
 	def printList(self):
+		if self.head is None:
+			print("List is empty")
+			return
 		currentNode = self.head 
 		while True:
 			if currentNode is None:
 				break
 			print(currentNode.data)
 			currentNode = currentNode.next
+
 firstNode = Node("John")
 linkedList = LinkedList()
-linkedList.insert(firstNode)
+linkedList.insertEnd(firstNode)
 secondNode = Node ("Ben")
-linkedList.insert(secondNode)
+linkedList.insertEnd(secondNode)
 thirdNode = Node("Matthew")
-linkedList.insert(thirdNode)
+linkedList.insertHead(thirdNode)
 linkedList.printList()
 
